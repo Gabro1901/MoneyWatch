@@ -1,0 +1,603 @@
+:root {
+    --primary-color: #4CAF50;
+    --primary-hover-color: #45a049;
+    --secondary-color: #f44336;
+    --secondary-hover-color: #e53935;
+    --background-color-light: #f4f4f4;
+    --text-color-light: #333;
+    --container-bg-light: #fff;
+    --border-color-light: #ddd;
+
+    --background-color-dark: #1e1e1e;
+    --text-color-dark: #f4f4f4;
+    --container-bg-dark: #2c2c2c;
+    --border-color-dark: #444;
+
+    --font-family: 'Roboto', sans-serif;
+    --transition-speed: 0.3s ease;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+.container {
+    background-color: var(--container-bg-light);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+body.dark-mode .container {
+    background-color: var(--container-bg-dark);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color-light);
+    padding-bottom: 20px;
+}
+
+body.dark-mode header {
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    transition: transform var(--transition-speed);
+}
+
+.logo img:hover {
+    transform: rotate(15deg);
+}
+
+.logo h1 {
+    font-size: 1.8em;
+    margin: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+body.dark-mode .logo h1 {
+    color: var(--text-color-dark);
+}
+
+/* Theme Switcher */
+.theme-switcher .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.theme-switcher .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switcher .theme-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none;
+    transition: opacity 0.3s ease, color var(--transition-speed);
+}
+
+.theme-switcher .sun-icon {
+    left: 5px;
+    color: #f0ad4e; /* Sun color */
+    opacity: 1;
+}
+
+.theme-switcher .moon-icon {
+    right: 5px;
+    color: #d4d4d4; /* Moon color */
+    opacity: 0;
+}
+
+.theme-switcher input:checked ~ .sun-icon {
+    opacity: 0;
+}
+
+.theme-switcher input:checked ~ .moon-icon {
+    opacity: 1;
+}
+
+.theme-switcher .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.theme-switcher .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.theme-switcher input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+.theme-switcher input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+.theme-switcher input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.earnings-display {
+    font-size: 4em;
+    font-weight: 300;
+    margin: 30px 0;
+    color: var(--primary-color);
+    animation: fadeInScale 0.5s ease-out;
+}
+
+body.dark-mode .earnings-display {
+    color: var(--primary-color);
+}
+
+/* Reverting/Simplifying currency symbol in earnings display */
+.earnings-display .currency-symbol {
+    font-size: 0.5em;
+    vertical-align: super;
+    margin-right: 5px;
+}
+
+/* New currency selector area below earnings */
+.currency-selector-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.current-currency-display {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    color: var(--text-color-light);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    user-select: none;
+}
+
+body.dark-mode .current-currency-display {
+    border-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+}
+
+.current-currency-display:hover {
+    background-color: var(--border-color-light);
+}
+
+body.dark-mode .current-currency-display:hover {
+    background-color: var(--border-color-dark);
+}
+
+.current-currency-display .currency-arrow {
+    margin-left: 8px;
+    font-size: 0.9em;
+    transition: transform 0.2s ease-in-out;
+}
+
+.current-currency-display.open .currency-arrow {
+    transform: rotate(180deg);
+}
+
+/* Popover adjustments */
+.currency-popover {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--container-bg-light);
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 5px 0;
+    z-index: 100;
+    width: max-content;
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform-origin: top center;
+    transition: opacity 0.2s ease-in-out, visibility 0s 0.2s linear, transform 0.2s ease-in-out;
+    transform: translateX(-50%) scaleY(0.95);
+}
+
+.currency-popover.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scaleY(1);
+    transition: opacity 0.2s ease-in-out, visibility 0s 0s linear, transform 0.2s ease-in-out;
+}
+
+body.dark-mode .currency-popover {
+    background-color: var(--container-bg-dark);
+    border-color: var(--border-color-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.currency-option {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: var(--text-color-light);
+    transition: background-color 0.2s ease;
+}
+
+body.dark-mode .currency-option {
+    color: var(--text-color-dark);
+}
+
+.currency-option:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-mode .currency-option:hover {
+    background-color: var(--primary-hover-color);
+    color: white;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.controls {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Left-align the input group contents */
+    gap: 8px;
+    transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.input-group label {
+    font-size: 0.9em;
+    color: var(--text-color-light);
+    font-weight: 500;
+    text-align: left; /* Left-align the label text */
+}
+
+.input-group label[for="hourlyRate"] {
+    font-weight: bold;
+}
+
+body.dark-mode .input-group label {
+    color: var(--text-color-dark);
+}
+
+.input-group input[type="number"] {
+    padding: 12px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    text-align: left; /* Left-align the input text */
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    background-color: var(--container-bg-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode .input-group input[type="number"] {
+    border-color: var(--border-color-dark);
+    background-color: var(--container-bg-dark);
+    color: var(--text-color-dark);
+}
+
+.input-group input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    outline: none;
+}
+
+.input-group select {
+    padding: 12px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    font-size: 1em;
+    width: 100%;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    background-color: var(--container-bg-light);
+    color: var(--text-color-light);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3E%3Cpath d='M8 11L2 5h12L8 11z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+}
+
+body.dark-mode .input-group select {
+    border-color: var(--border-color-dark);
+    background-color: var(--container-bg-dark);
+    color: var(--text-color-dark);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f4f4f4'%3E%3Cpath d='M8 11L2 5h12L8 11z'/%3E%3C/svg%3E");
+}
+
+.input-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    outline: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.buttons button {
+    flex: 1;
+    max-width: 150px; /* Limit button width on desktop */
+}
+
+.controls button {
+    padding: 12px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.controls button i {
+    font-size: 0.9em;
+}
+
+#startStopBtn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#startStopBtn:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#resetBtn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+#resetBtn:hover {
+    background-color: var(--secondary-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.time-display {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color-light);
+}
+
+body.dark-mode .time-display {
+    color: #aaa;
+    border-top: 1px solid var(--border-color-dark);
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 0.8em;
+    color: #888;
+    text-align: center; /* Center footer content */
+}
+
+body.dark-mode footer {
+    color: #bbb;
+}
+
+/* Animations for button clicks */
+.controls button:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 20px;
+    }
+    .earnings-display {
+        font-size: 3em;
+    }
+    .logo h1 {
+        font-size: 1.5em;
+    }
+    .controls button {
+        padding: 10px 15px;
+    }
+    .input-group input[type="number"] {
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding is included in width calculation */
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row; /* Ensure horizontal layout */
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .buttons button {
+        flex: 1;
+        max-width: none; /* Remove desktop max-width constraint on mobile */
+    }
+    header {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    .theme-switcher {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .earnings-display {
+        font-size: 2.5em;
+    }
+    .logo h1 {
+        font-size: 1.3em;
+    }
+    .controls button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    .input-group input[type="number"] {
+        font-size: 0.9em;
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding is included in width calculation */
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row; /* Ensure horizontal layout */
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .buttons button {
+        flex: 1;
+        max-width: none; /* Remove desktop max-width constraint on mobile */
+    }
+}
+
+/* Styles for disabled input group */
+.input-group.disabled {
+    opacity: 0.5;
+}
+
+.input-group.disabled label,
+.input-group.disabled input[type="number"] {
+    /* cursor: not-allowed; /* Optional: change cursor */
+}
+
+.input-group.disabled input[type="number"] {
+    pointer-events: none; /* Make input non-interactive */
+    background-color: var(--background-color-light); /* Slightly different bg for visual cue */
+}
+
+body.dark-mode .input-group.disabled input[type="number"] {
+    background-color: var(--background-color-dark);
+}
+
+/* Ensure old experimental styles are removed */
+.earnings-display .currency-symbol-container {
+    /* This class should no longer be in HTML, so rules here are dead */
+    /* display: none !important; /* or just remove if not affecting other things by mistake */
+}
+
+/* Remove styles specifically for an arrow inside .currency-symbol-container if they existed and were complex */
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Add this to your existing CSS */
+/* .buttons button {
+    width: 100px; /* Set a specific width */
+/* } */
+
+.feature-request-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--primary-color, #4CAF50);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-top: 12px;
+}
+
+.feature-request-btn:hover {
+    background-color: var(--primary-color-hover, #45a049);
+}
+
+.feature-request-btn i {
+    font-size: 16px;
+}
